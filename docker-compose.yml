@@ -1,0 +1,8 @@
+version: '3'
+
+services:
+  omc.dockerapi:
+    image: omc.dockerapi
+    build:
+      context: ./OMC.DockerApi
+      dockerfile: Dockerfile
