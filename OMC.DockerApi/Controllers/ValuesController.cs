@@ -3,17 +3,41 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using System.Data.SqlClient;
+using Microsoft.Extensions.Configuration;
 
 namespace OMC.DockerApi.Controllers
 {
     [Route("api/[controller]")]
     public class ValuesController : Controller
     {
+        private IConfiguration _configuration;
+        public ValuesController(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
+
         // GET api/values
         [HttpGet]
         public IEnumerable<string> Get()
         {
-            return new string[] { "value1", "value2" };
+            var result = new List<string>();
+
+            using (var connection = new SqlConnection(_configuration.GetConnectionString("ValuesDatabase")))
+            {
+                connection.Open();
+
+                using (var command = new SqlCommand("SELECT * FROM [ValuesDatabase].[dbo].[Values]", connection))
+                using (var reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        result.Add(reader.GetString(1));
+                    }
+                }
+            }
+
+            return result;
         }
 
         // GET api/values/5

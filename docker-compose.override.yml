@@ -3,6 +3,13 @@ version: '3'
 services:
   omc.dockerapi:
     environment:
-      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_ENVIRONMENT=Docker
     ports:
       - "80"
+  mssql:
+    environment:
+      SA_PASSWORD: "YourStrong!Passw0rd"
+      ACCEPT_EULA: "Y"
+      MSSQL_PID: "Express"
+    volumes:
+      - C:\Users\VivienFABING\Desktop\mytestvolume:/var/opt/mssql

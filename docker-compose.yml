@@ -6,3 +6,9 @@ services:
     build:
       context: ./OMC.DockerApi
       dockerfile: Dockerfile
+    depends_on:
+      - mssql
+  mssql:
+    image: "microsoft/mssql-server-linux"
+    ports:
+      - "1433:1433"
