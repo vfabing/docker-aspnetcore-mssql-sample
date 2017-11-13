@@ -10,5 +10,5 @@ services:
       - mssql
   mssql:
     image: "microsoft/mssql-server-linux"
-    ports:
-      - "1433:1433"
+    expose:
+      - "1433"

@@ -13,3 +13,5 @@ services:
       MSSQL_PID: "Express"
     volumes:
       - C:\Users\VivienFABING\Desktop\mytestvolume:/var/opt/mssql
+    ports:
+      - "1433:1433"
