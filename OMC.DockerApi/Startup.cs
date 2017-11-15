@@ -25,6 +25,7 @@ namespace OMC.DockerApi
         {
             services.AddScoped((s) => Configuration);
             services.AddMvc();
+            services.AddCors();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -33,6 +34,7 @@ namespace OMC.DockerApi
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseCors(builder => builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
             }
 
             app.UseMvc();
