@@ -25,6 +25,8 @@ namespace OMC.DockerApi.Controllers
 
             using (var connection = new SqlConnection(_configuration.GetConnectionString("ValuesDatabase")))
             {
+                // Connection Timeout at launch because SQL Server is not available from the start.
+                // This is "normal" and should ideally be handle by implementing a retry system in the API
                 connection.Open();
 
                 using (var command = new SqlCommand("SELECT * FROM [ValuesDatabase].[dbo].[Values]", connection))
