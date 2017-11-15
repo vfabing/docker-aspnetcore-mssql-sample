@@ -12,3 +12,9 @@ services:
     image: "microsoft/mssql-server-linux"
     expose:
       - "1433"
+  angular:
+    image: docker-angular
+    build:
+      context: ./docker-angular
+    depends_on:
+      - omc.dockerapi
